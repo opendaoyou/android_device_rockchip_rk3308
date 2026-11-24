@@ -1,0 +1,7 @@
+type rk3308_dma_heap_device, dev_type;
+allow { surfaceflinger hal_graphics_allocator } rk3308_dma_heap_device:dir search;
+allow { surfaceflinger hal_graphics_allocator } rk3308_dma_heap_device:chr_file { open read ioctl };
+
+# The allocator reads fbdev geometry to size the DMA-BUF scanout buffers.
+allow hal_graphics_allocator_default graphics_device:dir search;
+allow hal_graphics_allocator_default graphics_device:chr_file rw_file_perms;

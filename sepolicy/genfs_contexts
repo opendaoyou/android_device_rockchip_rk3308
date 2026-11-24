@@ -1,0 +1,2 @@
+genfscon sysfs /devices/platform/backlight/backlight/backlight/brightness u:object_r:rk3308_backlight_brightness:s0
+genfscon sysfs /devices/platform/backlight/backlight/backlight/max_brightness u:object_r:rk3308_backlight_max:s0

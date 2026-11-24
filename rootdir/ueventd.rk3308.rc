@@ -1,0 +1,5 @@
+subsystem dma_heap
+    devname uevent_devname
+    dirname /dev
+
+/dev/dma_heap/system 0660 root graphics

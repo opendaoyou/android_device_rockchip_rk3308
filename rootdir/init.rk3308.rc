@@ -1,0 +1,24 @@
+on init && property:ro.debuggable=1
+    mkdir /dev/usb-ffs 0770 shell shell
+    mkdir /dev/usb-ffs/adb 0770 shell shell
+    mkdir /config/usb_gadget/g1 0755 root root
+    write /config/usb_gadget/g1/idVendor 0x2207
+    write /config/usb_gadget/g1/idProduct 0x0006
+    mkdir /config/usb_gadget/g1/strings/0x409 0755 root root
+    write /config/usb_gadget/g1/strings/0x409/manufacturer Sogou
+    write /config/usb_gadget/g1/strings/0x409/product "Sogou E1"
+    write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno:-sogou-e1}
+    mkdir /config/usb_gadget/g1/functions/ffs.adb 0755 root root
+    mkdir /config/usb_gadget/g1/configs/b.1 0755 root root
+    mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0755 root root
+    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
+    setprop sys.usb.controller ff400000.usb
+
+on fs
+    mount_all /fstab.rk3308
+
+on post-fs
+    swapon_all /fstab.rk3308
+
+on boot && property:ro.debuggable=1
+    setprop sys.usb.configfs 1

@@ -1,0 +1,1 @@
+add_lunch_combo aosp_sogou_e1-userdebug

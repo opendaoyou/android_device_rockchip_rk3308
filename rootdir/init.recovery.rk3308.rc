@@ -1,0 +1,33 @@
+on init && property:ro.debuggable=1
+    mkdir /config 0755 root root
+    mount configfs none /config
+    mkdir /config/usb_gadget/g1 0755 root root
+    write /config/usb_gadget/g1/idVendor 0x2207
+    write /config/usb_gadget/g1/idProduct 0x0006
+    mkdir /config/usb_gadget/g1/strings/0x409 0755 root root
+    write /config/usb_gadget/g1/strings/0x409/manufacturer Sogou
+    write /config/usb_gadget/g1/strings/0x409/product "Sogou E1 Recovery"
+    write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno:-sogou-e1}
+    mkdir /config/usb_gadget/g1/configs/c.1 0755 root root
+    mkdir /config/usb_gadget/g1/configs/c.1/strings/0x409 0755 root root
+    write /config/usb_gadget/g1/configs/c.1/strings/0x409/configuration "ADB"
+    mkdir /config/usb_gadget/g1/functions/ffs.adb 0755 root root
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/c.1/f1
+
+on fs && property:ro.debuggable=1
+    # Oreo adbd checks ep0 only at process startup.
+    wait /dev/usb-ffs/adb/ep0 5
+    restart adbd
+
+on property:sys.usb.ffs.ready=1 && property:ro.debuggable=1
+    wait /sys/class/udc/ff400000.usb 5
+    write /config/usb_gadget/g1/UDC ff400000.usb
+
+on property:init.svc.adbd=stopped && property:ro.debuggable=1
+    setprop sys.usb.ffs.ready 0
+
+on property:init.svc.adbd=restarting && property:ro.debuggable=1
+    setprop sys.usb.ffs.ready 0
+
+on property:sys.usb.ffs.ready=0 && property:ro.debuggable=1
+    write /config/usb_gadget/g1/UDC none

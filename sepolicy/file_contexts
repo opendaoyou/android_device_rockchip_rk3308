@@ -1,0 +1,13 @@
+/dev/block/platform/ff490000\.mmc/by-name/recovery  u:object_r:recovery_block_device:s0
+/dev/block/platform/ff490000\.mmc/by-name/system    u:object_r:system_block_device:s0
+/dev/block/platform/ff490000\.mmc/by-name/vendor    u:object_r:system_block_device:s0
+/dev/block/platform/ff490000\.mmc/by-name/cache     u:object_r:cache_block_device:s0
+/dev/block/platform/ff490000\.mmc/by-name/userdata  u:object_r:userdata_block_device:s0
+/dev/dma_heap(/.*)?                                u:object_r:rk3308_dma_heap_device:s0
+/vendor/lib/egl/lib(EGL|GLESv1_CM|GLESv2)_lp\.so     u:object_r:same_process_hal_file:s0
+/vendor/lib/libgallium_dri\.so                     u:object_r:same_process_hal_file:s0
+/vendor/lib/libglapi\.so                           u:object_r:same_process_hal_file:s0
+/vendor/lib/hw/vulkan\.rk3308\.so                  u:object_r:same_process_hal_file:s0
+/dev/block/platform/ff490000\.mmc/by-name/boot      u:object_r:boot_block_device:s0
+/dev/block/platform/ff490000\.mmc/by-name/misc      u:object_r:misc_block_device:s0
+/dev/block/zram0                                   u:object_r:swap_block_device:s0

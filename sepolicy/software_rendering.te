@@ -1,0 +1,2 @@
+# Mesa llvmpipe generates shader code in memory in these EGL clients.
+allow { surfaceflinger bootanim } self:process execmem;

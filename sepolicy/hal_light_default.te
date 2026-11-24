@@ -1,0 +1,5 @@
+type rk3308_backlight_brightness, fs_type, sysfs_type;
+type rk3308_backlight_max, fs_type, sysfs_type;
+
+allow hal_light_default rk3308_backlight_brightness:file w_file_perms;
+allow hal_light_default rk3308_backlight_max:file r_file_perms;

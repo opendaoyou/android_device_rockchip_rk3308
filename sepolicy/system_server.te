@@ -1,0 +1,2 @@
+# The BSP kernel checks watch permission when Oreo registers its inotify monitors.
+allow system_server { input_device system_data_file }:dir watch;
